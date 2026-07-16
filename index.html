@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We are レスキュー｜高すぎる契約から、お店を救う。契約・固定費の無料診断コンシェルジュ</title>
+<meta name="description" content="HP制作の高額契約や割高な固定費に悩む店舗オーナーを、中立の第三者として無料で救出。契約・固定費の無料診断から適正なサービスのご提案、乗り換えサポートまで、店舗側の費用負担は一切なし。株式会社OPENGATEが運営するコンシェルジュサービスです。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="We are レスキュー｜高すぎる契約から、お店を救う。">
+<meta property="og:description" content="店舗オーナーの契約・固定費を中立の立場で無料診断。適正なサービスと費用をご提案するコンシェルジュサービス。相談から提案まで完全無料。">
+<meta property="og:site_name" content="We are レスキュー">
+<!-- TODO: 独自ドメイン移行時は以下の絶対URLを一括で差し替える -->
+<meta property="og:url" content="https://arataisozaki-shinai.github.io/weare-rescue-lp/">
+<meta property="og:image" content="https://arataisozaki-shinai.github.io/weare-rescue-lp/assets/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://arataisozaki-shinai.github.io/weare-rescue-lp/">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   We are レスキュー — 最終版
+   ベース: 候補A「緊急レスキュー・ダーク」
+   移植: 候補Cのヒーロー赤地白抜きハイライト /
+         候補Bの白基調ボディ・セマンティクス・堅牢アコーディオン /
+         候補B/Cのフォーカス管理・rAFスロットル
+   構成: ダークのヘッダー＆ヒーロー → 白基調の本文 → ダークのクロージング
+   ============================================================ */
+:root{
+  /* 赤の3階調（候補A: 面用 / ダーク面大見出し用 / ダーク面小テキスト用AA確保） */
+  --red:#E60012;
+  --red-dark:#C4000F;
+  --red-hi:#ff2f3e;
+  --red-text:#ff4655;
+  --red-pale:#FDECEE;
+  /* ライト面（本文セクション） */
+  --paper:#ffffff;
+  --paper-soft:#f7f7f9;
+  --line:#e5e5ea;
+  --ink:#111214;
+  --body-c:#35353b;
+  --muted:#63636d;
+  /* ダーク面（ヘッダー・ヒーロー・クロージング・フッター） */
+  --dark-0:#0c0c0f;
+  --dark-1:#131317;
+  --dark-2:#16161a;
+  --dark-line:#2a2a32;
+  --dark-ink:#f2f2f5;
+  --dark-body:#d8d8de;
+  --dark-muted:#a9a9b4;
+  --line-green:#06C755;
+  --maxw:1120px;
+  --radius:8px;
+  --shadow-sm:0 4px 14px rgba(17,17,17,.06);
+  --shadow:0 10px 32px rgba(17,17,17,.08);
+  --shadow-red:0 12px 34px rgba(230,0,18,.26);
+  --focus:#E60012;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{
+  scroll-padding-top:104px;
+  overflow-x:clip;
+}
+@media (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+}
+body{
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic Medium",Meiryo,system-ui,-apple-system,sans-serif;
+  background:var(--paper);
+  color:var(--body-c);
+  font-size:16px;
+  line-height:1.9;
+  letter-spacing:.02em;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"palt";
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+strong{color:var(--ink);font-weight:700}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+/* ダーク区画ではフォーカスリングを白に切替（候補B/C） */
+.site-header,.hero,.closing,.site-footer{--focus:#ffffff}
+
+/* ---------- 汎用 ---------- */
+.container{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,4vw,40px)}
+.section{position:relative;padding-block:clamp(72px,10vw,128px)}
+.bg-paper{background:var(--paper)}
+.bg-soft{background:var(--paper-soft)}
+/* 斜めカットライン: ダークのヒーローから白基調本文への斜断面
+   （.section が position:relative なのでセクション上端に絶対配置し、ヒーロー下端へ密着させる） */
+.cut{position:absolute;top:0;left:0;right:0;height:clamp(40px,5.5vw,84px);z-index:1;pointer-events:none}
+.cut--ltr{clip-path:polygon(0 0,100% 0,0 100%)}
+.cut--dark{background:var(--dark-0)}
+/* ハザードストライプ */
+.hazard{height:8px;background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#101014 14px 28px)}
+
+/* セクション見出し */
+.sec-head{margin-bottom:clamp(36px,5vw,60px)}
+.kicker{
+  display:inline-flex;align-items:center;gap:.65em;
+  font-size:.8rem;font-weight:700;letter-spacing:.28em;
+  color:var(--red);text-transform:uppercase;
+  margin-bottom:1em;
+}
+.kicker::before{
+  content:"";width:34px;height:10px;flex:none;
+  background:repeating-linear-gradient(-45deg,var(--red) 0 5px,transparent 5px 10px);
+}
+/* bg-soft（#f7f7f9）上では --red が小文字AA（4.5:1）をわずかに下回るため濃赤に切替 */
+.bg-soft .kicker{color:var(--red-dark)}
+.sec-title{
+  font-size:clamp(1.55rem,4.6vw,2.6rem);
+  font-weight:900;color:var(--ink);
+  line-height:1.4;letter-spacing:.03em;
+}
+.sec-title .accent{color:var(--red)}
+.sec-lead{margin-top:1.2em;max-width:46em}
+
+/* ボタン */
+.btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  min-height:56px;padding:.9em 1.9em;border-radius:6px;border:2px solid transparent;
+  font-weight:700;font-size:1rem;line-height:1.45;text-align:center;
+  transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,filter .2s ease;
+  cursor:pointer;
+}
+.btn svg{flex:none}
+/* 赤ボタン: 上端も var(--red) 始まりで白文字AA（4.5:1以上）を確保 */
+.btn-red{
+  background:linear-gradient(180deg,var(--red) 0%,#d4000f 60%,var(--red-dark) 100%);
+  color:#fff;box-shadow:var(--shadow-red);
+}
+.btn-red:hover{transform:translateY(-2px);filter:brightness(1.07);box-shadow:0 16px 40px rgba(230,0,18,.38)}
+/* LINEブランドグリーン（候補A）: 緑地に濃色文字でコントラスト確保 */
+.btn-line{
+  background:var(--line-green);color:#07130a;
+  box-shadow:0 10px 26px rgba(6,199,85,.22);
+}
+.btn-line:hover{transform:translateY(-2px);filter:brightness(1.06)}
+/* LINE URL確定までの一時無効状態（href 設定時に aria-disabled ごと外す） */
+.btn[aria-disabled="true"]{opacity:.55;box-shadow:none;pointer-events:none;cursor:not-allowed}
+.btn:active{transform:translateY(0)}
+.btn--big{font-size:clamp(1.02rem,2.4vw,1.2rem);padding:1em 2.2em;min-height:64px}
+.btn-stack{display:flex;flex-direction:column;align-items:center;line-height:1.35}
+.btn-stack .btn-sub{font-size:.78em;font-weight:500;opacity:.92}
+.btn-stack .btn-num{font-size:1.3em;font-weight:900;letter-spacing:.04em;font-feature-settings:"tnum"}
+.cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch}
+.cta-row .btn{flex:1 1 260px;max-width:420px}
+
+/* スクロールリビール（候補Bの安全パターン:
+   JS有効かつIntersectionObserver対応かつreduced-motion無効の時のみ
+   JSから .will-reveal を付与する。どの失敗モードでも内容は隠れない） */
+.will-reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .7s ease,transform .7s cubic-bezier(.22,.7,.25,1);
+  transition-delay:var(--d,0s);
+}
+.will-reveal.is-revealed{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .will-reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+
+/* ============ 1. ヘッダー ============ */
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  background:rgba(12,12,15,.78);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background-color .3s ease,box-shadow .3s ease;
+}
+.site-header.is-scrolled{
+  background:rgba(10,10,13,.94);
+  box-shadow:0 4px 24px rgba(0,0,0,.45);
+  border-bottom-color:rgba(230,0,18,.35);
+}
+.header-inner{
+  max-width:var(--maxw);margin-inline:auto;
+  padding:10px clamp(16px,4vw,40px);
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  min-height:72px;
+}
+.header-brand{display:flex;align-items:center;gap:14px;min-width:0}
+.header-brand a{display:flex;align-items:center;min-height:44px}
+.header-brand img{height:clamp(34px,6vw,44px);width:auto}
+.header-tagline{
+  display:none;font-size:.78rem;color:var(--dark-muted);font-weight:500;letter-spacing:.06em;
+  border-left:2px solid var(--red);padding-left:12px;white-space:nowrap;
+}
+@media (min-width:900px){.header-tagline{display:block}}
+.header-cta{display:flex;flex-direction:column;align-items:center;gap:3px;flex:none}
+.btn-header{
+  min-height:44px;padding:.45em 1.1em;font-size:.95rem;border-radius:5px;
+}
+.btn-header .btn-num{font-size:1.05em;font-weight:900;letter-spacing:.03em}
+.header-cta-note{font-size:.68rem;color:var(--dark-muted);letter-spacing:.04em;white-space:nowrap}
+@media (max-width:420px){
+  .header-cta-note{display:none}
+  .btn-header .btn-num{font-size:1em}
+}
+
+/* ============ 2. ヒーロー（ダーク維持・装飾は整理） ============ */
+.hero{
+  position:relative;overflow:clip;
+  color:var(--dark-body);
+  background:
+    radial-gradient(900px 480px at 82% 18%,rgba(230,0,18,.15),transparent 62%),
+    radial-gradient(700px 500px at 8% 88%,rgba(230,0,18,.07),transparent 60%),
+    linear-gradient(165deg,#15151a 0%,var(--dark-0) 62%,var(--dark-0) 100%);
+  padding-top:clamp(140px,18vw,190px);
+  padding-bottom:clamp(64px,8vw,96px);
+}
+.hero strong{color:var(--dark-ink)}
+.hero-grid{
+  position:relative;display:grid;gap:clamp(36px,6vw,64px);
+  align-items:center;
+}
+@media (min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr)}}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:.7em;
+  font-size:.78rem;font-weight:700;letter-spacing:.3em;color:var(--red-text);
+  text-transform:uppercase;margin-bottom:1.4em;
+}
+/* パルスする救難ビーコン（reduced-motion時はグローバル停止） */
+.beacon{position:relative;width:10px;height:10px;flex:none}
+.beacon::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--red-hi)}
+.beacon::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(255,47,62,.6);animation:beacon 1.8s ease-out infinite}
+@keyframes beacon{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.9);opacity:0}}
+.hero-title{
+  font-size:clamp(1.75rem,5.6vw,3.3rem);
+  font-weight:900;color:var(--dark-ink);line-height:1.55;letter-spacing:.02em;
+}
+/* 赤地白抜きハイライト（候補C）: 5秒自分事化の最強タイポグラフィ */
+.hero-title .hl{
+  color:#fff;background:var(--red);
+  padding:0 .12em;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+.hero-sub{margin-top:1.6em;max-width:36em;font-size:clamp(.95rem,1.8vw,1.05rem)}
+.hero-sub + .hero-sub{margin-top:1em}
+.hero-cta{margin-top:2.2em}
+/* ヒーロー右のエンブレム（グローは控えめに調整） */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;padding:24px 0}
+.hero-visual .emblem{
+  position:relative;width:min(72vw,420px);
+  filter:drop-shadow(0 0 32px rgba(230,0,18,.22));
+}
+.hero-visual .emblem img{width:100%}
+/* ヒーロー下の安心バー */
+.assure{
+  position:relative;margin-top:clamp(48px,6vw,72px);
+  background:linear-gradient(180deg,#17171c,#121216);
+  border:1px solid var(--dark-line);border-radius:var(--radius);
+  overflow:hidden;
+}
+.assure::before{content:"";display:block;height:6px;background:repeating-linear-gradient(-45deg,var(--red) 0 12px,#101014 12px 24px)}
+.assure-list{display:grid;gap:0;padding:6px 0}
+@media (min-width:760px){.assure-list{grid-template-columns:repeat(3,1fr)}}
+.assure-list li{
+  display:flex;align-items:center;gap:12px;
+  padding:16px clamp(18px,3vw,28px);
+  font-weight:700;color:var(--dark-ink);font-size:.95rem;
+}
+.assure-list li + li{border-top:1px solid var(--dark-line)}
+@media (min-width:760px){
+  .assure-list li + li{border-top:0;border-left:1px solid var(--dark-line)}
+}
+.check-ico{
+  flex:none;width:26px;height:26px;border-radius:50%;
+  background:var(--red);display:grid;place-items:center;
+}
+
+/* ============ 3. 悩み提起（白基調・候補Bのカード下地） ============ */
+.bubble-grid{display:grid;gap:18px}
+@media (min-width:760px){.bubble-grid{grid-template-columns:repeat(2,1fr);gap:22px}}
+.bubble{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--line);
+  border-left:4px solid var(--red);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  padding:22px 24px 22px 58px;
+  font-size:.98rem;
+}
+.bubble::before{
+  content:"";position:absolute;left:-4px;bottom:-11px;
+  width:20px;height:20px;
+  background:#fff;
+  border-left:4px solid var(--red);border-bottom:1px solid var(--line);
+  clip-path:polygon(0 0,100% 0,0 100%);
+}
+.bubble .qmark{
+  position:absolute;left:18px;top:20px;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--red-pale);border:1px solid rgba(230,0,18,.4);
+  display:grid;place-items:center;
+  color:var(--red);font-weight:900;font-size:.9rem;line-height:1;
+}
+.bubble strong{color:var(--red-dark)}
+.problems-close{
+  margin-top:clamp(40px,6vw,56px);
+  background:linear-gradient(135deg,rgba(230,0,18,.08),rgba(230,0,18,.02));
+  border:1px solid rgba(230,0,18,.35);
+  border-radius:var(--radius);
+  padding:clamp(26px,4vw,40px);
+  text-align:center;
+}
+.problems-close .lead-strong{
+  font-size:clamp(1.15rem,3vw,1.5rem);font-weight:900;color:var(--ink);line-height:1.7;
+}
+.problems-close .lead-strong .accent{color:var(--red)}
+.problems-close p + p{margin-top:.9em}
+
+/* ============ 4. サービス紹介 ============ */
+.service-sub{
+  font-size:clamp(1.05rem,2.4vw,1.3rem);font-weight:700;color:var(--red);
+  margin-top:.9em;line-height:1.7;
+}
+.service-body{max-width:50em}
+.service-body p + p,.service-body ol{margin-top:1.2em}
+.service-steps{counter-reset:svc;display:grid;gap:14px;margin-top:1.4em !important}
+.service-steps li{
+  counter-increment:svc;position:relative;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  padding:18px 20px 18px 64px;
+}
+.service-steps li::before{
+  content:counter(svc);position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  width:30px;height:30px;border-radius:4px;background:var(--red);color:#fff;
+  font-weight:900;display:grid;place-items:center;font-size:.95rem;
+}
+.can-grid{display:grid;gap:18px;margin-top:clamp(36px,5vw,52px)}
+@media (min-width:680px){.can-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1024px){.can-grid{grid-template-columns:repeat(4,1fr)}}
+.can-card{
+  position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  padding:26px 22px;overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.can-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(230,0,18,.45)}
+.can-card::after{
+  content:"";position:absolute;right:-18px;top:-18px;width:56px;height:56px;
+  background:repeating-linear-gradient(-45deg,rgba(230,0,18,.4) 0 6px,transparent 6px 12px);
+  clip-path:polygon(100% 0,0 0,100% 100%);opacity:.45;
+}
+.can-ico{
+  width:52px;height:52px;border-radius:10px;
+  background:var(--red-pale);
+  border:1px solid rgba(230,0,18,.3);
+  display:grid;place-items:center;margin-bottom:16px;color:var(--red);
+}
+.can-card h3{font-size:1.02rem;font-weight:900;color:var(--ink);line-height:1.6;margin-bottom:.6em}
+.can-card p{font-size:.9rem;color:var(--body-c)}
+.service-note{
+  margin-top:clamp(28px,4vw,40px);font-size:.8rem;color:var(--muted);
+  border:1px dashed var(--line);border-radius:6px;padding:14px 18px;max-width:52em;
+}
+
+/* ============ 5. 選ばれる理由 ============ */
+.reason-grid{display:grid;gap:20px}
+@media (min-width:860px){.reason-grid{grid-template-columns:repeat(2,1fr);gap:26px}}
+.reason-card{
+  position:relative;background:#fff;
+  border:1px solid var(--line);border-top:3px solid var(--red);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  padding:30px 26px 26px;overflow:hidden;
+}
+.reason-num{
+  position:absolute;right:14px;top:2px;
+  font-size:4.6rem;font-weight:900;line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(230,0,18,.35);
+  user-select:none;pointer-events:none;font-feature-settings:"tnum";
+}
+@supports not (-webkit-text-stroke:1px red){
+  .reason-num{color:var(--red-pale)}
+}
+.reason-card h3{
+  font-size:clamp(1.06rem,2.2vw,1.22rem);font-weight:900;color:var(--ink);
+  line-height:1.6;margin-bottom:.7em;padding-right:2.2em;
+}
+.reason-card p{font-size:.94rem}
+
+/* ============ 6. 料金（dl構造 + 候補Aの赤帯バナー） ============ */
+.price-grid{display:grid;gap:14px;margin-bottom:clamp(30px,4vw,40px)}
+@media (min-width:640px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1024px){.price-grid{grid-template-columns:repeat(4,1fr)}}
+.price-item{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  padding:26px 18px;text-align:center;position:relative;overflow:hidden;
+}
+.price-item::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--red)}
+.price-item dt{font-size:.92rem;font-weight:700;color:var(--body-c);margin-bottom:.3em}
+.price-item dd .yen{
+  display:block;font-size:clamp(2.4rem,5vw,3rem);font-weight:900;line-height:1.15;
+  color:var(--red);font-feature-settings:"tnum";letter-spacing:.02em;
+}
+.price-item dd .yen .unit{font-size:.5em}
+/* 「ご負担は一切ありません」赤帯バナー（候補A）: 0円グリッド直後で不安を断ち切る */
+.price-banner{
+  position:relative;background:linear-gradient(180deg,#f21123,var(--red));
+  border-radius:var(--radius);padding:clamp(24px,4vw,34px) clamp(20px,4vw,40px);
+  text-align:center;box-shadow:var(--shadow-red);overflow:hidden;
+}
+.price-banner::before,.price-banner::after{
+  content:"";position:absolute;left:0;right:0;height:6px;
+  background:repeating-linear-gradient(-45deg,rgba(0,0,0,.35) 0 12px,transparent 12px 24px);
+}
+.price-banner::before{top:0}
+.price-banner::after{bottom:0}
+.price-banner p{
+  font-size:clamp(1.2rem,3.2vw,1.7rem);font-weight:900;color:#fff;letter-spacing:.04em;
+}
+.why-free{
+  margin-top:clamp(36px,5vw,52px);
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  padding:clamp(24px,4vw,36px);max-width:52em;
+}
+.why-free h3{font-size:clamp(1.05rem,2.4vw,1.25rem);font-weight:900;color:var(--ink);margin-bottom:.8em;line-height:1.7}
+.why-free p + p{margin-top:.8em}
+
+/* ============ 7. ご利用の流れ（ol構造） ============ */
+.flow-grid{display:grid;gap:34px;counter-reset:flow}
+@media (min-width:860px){.flow-grid{grid-template-columns:repeat(3,1fr);gap:22px}}
+.flow-card{
+  position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  padding:30px 24px 26px;
+}
+.flow-step{
+  display:inline-flex;align-items:baseline;gap:.4em;
+  color:var(--red);font-weight:900;letter-spacing:.18em;font-size:.8rem;
+  text-transform:uppercase;margin-bottom:.9em;
+}
+.flow-step .n{
+  font-size:2.2rem;letter-spacing:0;color:var(--red);line-height:1;
+  font-feature-settings:"tnum";
+}
+.flow-card h3{font-size:1.08rem;font-weight:900;color:var(--ink);line-height:1.6;margin-bottom:.6em}
+.flow-card p{font-size:.92rem}
+/* 接続矢印 */
+.flow-card:not(:last-child)::after{
+  content:"";position:absolute;
+  left:50%;bottom:-26px;transform:translateX(-50%) rotate(90deg);
+  border:9px solid transparent;border-left:13px solid var(--red);
+}
+@media (min-width:860px){
+  .flow-card:not(:last-child)::after{
+    left:auto;right:-18px;top:50%;bottom:auto;
+    transform:translateY(-50%);
+  }
+}
+.flow-cta{margin-top:clamp(44px,6vw,60px);display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.flow-cta .btn{flex:1 1 280px;max-width:420px}
+
+/* ============ 8. FAQ（候補Bの正統アコーディオン:
+   .js クラスでゲート — JS無効/CSS無効のどの失敗モードでも回答は読める。
+   閉状態は visibility:hidden でスクリーンリーダーにも露出しない ============ */
+.faq-list{display:grid;gap:14px;max-width:56em;margin-inline:auto}
+.faq-item{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;transition:border-color .25s ease;
+}
+.faq-item:has(.faq-q[aria-expanded="true"]){border-color:rgba(230,0,18,.5)}
+.faq-q{
+  width:100%;display:flex;align-items:center;gap:14px;
+  background:none;border:0;color:var(--ink);
+  font-family:inherit;font-size:clamp(.95rem,2vw,1.05rem);font-weight:700;line-height:1.7;
+  text-align:left;padding:20px 20px;min-height:64px;cursor:pointer;
+}
+.faq-q:hover{background:var(--paper-soft)}
+.faq-q .q-badge{
+  flex:none;width:34px;height:34px;border-radius:6px;background:var(--red);
+  color:#fff;font-weight:900;display:grid;place-items:center;font-size:.9rem;
+}
+.faq-q .q-text{flex:1}
+.faq-icon{
+  flex:none;position:relative;width:18px;height:18px;margin-left:auto;
+}
+.faq-icon::before,.faq-icon::after{
+  content:"";position:absolute;background:var(--red);border-radius:2px;
+  transition:transform .3s ease;
+}
+.faq-icon::before{left:0;right:0;top:8px;height:2px}
+.faq-icon::after{top:0;bottom:0;left:8px;width:2px}
+.faq-q[aria-expanded="true"] .faq-icon::after{transform:scaleY(0)}
+.faq-a{display:grid;grid-template-rows:1fr}
+.js .faq-a{
+  grid-template-rows:0fr;
+  visibility:hidden;
+  transition:grid-template-rows .35s ease,visibility 0s linear .35s;
+}
+.js .faq-a.is-open{
+  grid-template-rows:1fr;
+  visibility:visible;
+  transition:grid-template-rows .35s ease;
+}
+.faq-a-inner{overflow:hidden;min-height:0}
+.faq-a-body{padding:0 20px 22px 68px}
+@media (max-width:560px){.faq-a-body{padding-left:20px}}
+.faq-a-body p{font-size:.93rem}
+
+/* ============ 9. クロージングCTA（白ページ末尾の黒反転・候補B×候補A） ============ */
+.closing{
+  position:relative;overflow:clip;
+  color:var(--dark-body);
+  background:
+    radial-gradient(760px 420px at 50% 0%,rgba(230,0,18,.2),transparent 65%),
+    linear-gradient(180deg,#141418 0%,#0b0b0e 100%);
+  text-align:center;
+}
+.closing strong{color:var(--dark-ink)}
+.closing .kicker{color:var(--red-text)}
+.closing .hazard--top{position:absolute;top:0;left:0;right:0}
+.closing .hazard--bottom{position:absolute;bottom:0;left:0;right:0}
+.closing .container{position:relative}
+.closing-title{
+  font-size:clamp(1.5rem,4.6vw,2.5rem);font-weight:900;color:var(--dark-ink);line-height:1.6;
+}
+.closing-body{max-width:40em;margin:1.6em auto 0}
+.closing-body p + p{margin-top:.9em}
+.closing-body .punch{font-weight:900;color:var(--dark-ink);font-size:1.06em}
+.closing-body .punch .accent{color:var(--red-hi)}
+.closing-cta{margin-top:2.4em;display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.closing-cta .btn{flex:1 1 300px;max-width:460px}
+.closing-hours{margin-top:1.8em;font-weight:700;color:var(--dark-ink);letter-spacing:.06em}
+.closing-assure{margin-top:.8em;font-size:.82rem;color:var(--dark-muted)}
+
+/* ============ 10. フッター ============ */
+.site-footer{background:#060608;color:var(--dark-body);padding:clamp(52px,7vw,80px) 0 36px}
+.site-footer strong{color:var(--dark-ink)}
+.footer-grid{display:grid;gap:36px}
+@media (min-width:860px){.footer-grid{grid-template-columns:1.1fr 1fr;gap:60px}}
+.footer-brand img{width:min(60vw,240px)}
+.footer-brand p{margin-top:1.2em;font-size:.85rem;color:var(--dark-muted)}
+.footer-info h2{font-size:.8rem;font-weight:700;letter-spacing:.24em;color:var(--red-text);text-transform:uppercase;margin-bottom:1.2em}
+.footer-info dl{display:grid;grid-template-columns:auto 1fr;gap:.5em 1.4em;font-size:.9rem}
+.footer-info dt{font-weight:700;color:var(--dark-ink);white-space:nowrap}
+.footer-info dd a{text-decoration:underline;text-underline-offset:3px}
+.footer-info dd a:hover{color:var(--red-text)}
+.footer-nav{margin-top:clamp(36px,5vw,52px);padding-top:26px;border-top:1px solid #1c1c22}
+.footer-nav ul{display:flex;flex-wrap:wrap;gap:.4em 2em;font-size:.88rem}
+.footer-nav a{padding:.4em 0;display:inline-flex;align-items:center;gap:10px;min-height:44px}
+/* ロゴのシェブロン形状を反響させる赤三角ブレット（候補C） */
+.footer-nav a::before{
+  content:"";width:8px;height:12px;flex:none;
+  background:var(--red);clip-path:polygon(0 0,100% 50%,0 100%);
+}
+.footer-nav a:hover{color:var(--red-text)}
+.copyright{margin-top:30px;font-size:.78rem;color:var(--dark-muted);letter-spacing:.06em}
+
+/* スキップリンク（候補A） */
+.skip-link{
+  position:fixed;left:16px;top:-60px;z-index:200;
+  background:var(--red);color:#fff;font-weight:700;
+  padding:.6em 1.2em;border-radius:0 0 6px 6px;transition:top .2s ease;
+}
+.skip-link:focus{top:0}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<!-- ============ 1. ヘッダー（常設コンバージョン装置・候補A） ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <div class="header-brand">
+      <a href="#top" aria-label="We are レスキュー トップへ">
+        <!-- 暗い背景のため白抜きロゴ（logo-white.png）を使用 -->
+        <img src="assets/logo-white.png" alt="We are レスキュー" width="982" height="384">
+      </a>
+      <p class="header-tagline">高すぎる契約から、お店を救う。</p>
+    </div>
+    <div class="header-cta">
+      <a class="btn btn-red btn-header" href="tel:+81671765693">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.05-.24c1.15.38 2.4.59 3.65.59a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.7 21 3 13.3 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.26.2 2.5.59 3.65a1 1 0 0 1-.25 1.05l-2.24 2.1Z"/></svg>
+        <span class="btn-num">06-7176-5693</span>
+      </a>
+      <p class="header-cta-note">相談無料｜受付時間 10:00〜19:00</p><!-- TODO: 受付時間を確認して確定 -->
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ 2. ヒーロー ============ -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-kicker"><span class="beacon" aria-hidden="true"></span>EMERGENCY CONCIERGE SERVICE</p>
+        <h1 class="hero-title" id="hero-title">
+          その月額、<span class="hl">払いすぎ</span>かもしれません。<br>
+          あなたのお店、私たちが<span class="hl">救出</span>します。
+        </h1>
+        <p class="hero-sub">
+          HP制作の高額契約、よく分からないまま払い続けている月額費用、鳴りやまない営業電話——。<br>
+          「We are レスキュー」は、店舗オーナーの契約と固定費を<strong>中立の第三者として無料で診断</strong>し、適正なサービスと費用をご提案するコンシェルジュサービスです。
+        </p>
+        <p class="hero-sub">相談から提案まで、店舗側の費用負担は<strong>一切ありません</strong>。</p>
+        <div class="cta-row hero-cta">
+          <a class="btn btn-red btn--big btn-stack" href="tel:+81671765693">
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:.4em"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.05-.24c1.15.38 2.4.59 3.65.59a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.7 21 3 13.3 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.26.2 2.5.59 3.65a1 1 0 0 1-.25 1.05l-2.24 2.1Z"/></svg>今すぐ電話で相談する（無料）</span>
+            <span class="btn-num">06-7176-5693</span>
+          </a>
+          <!-- TODO: LINE URL確定後、href="https://lin.ee/…" を設定して aria-disabled を外す -->
+          <a class="btn btn-line btn--big" aria-disabled="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.64 2 11.1c0 3.99 3.54 7.33 8.32 7.97.32.07.77.22.88.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1 .88.55 1.08-.46 5.84-3.44 7.97-5.89C21.4 14.4 22 12.83 22 11.1 22 6.64 17.52 3 12 3Z"/></svg>
+            LINEで無料相談
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="emblem">
+          <!-- 暗い背景のため白抜きロゴ（logo-white.png）を使用 -->
+          <img src="assets/logo-white.png" alt="" width="982" height="384">
+        </div>
+      </div>
+    </div>
+
+    <!-- 安心バー -->
+    <div class="assure" data-reveal>
+      <ul class="assure-list">
+        <li>
+          <span class="check-ico" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg></span>
+          相談・診断・提案まで完全無料
+        </li>
+        <li>
+          <span class="check-ico" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg></span>
+          特定メーカーに偏らない中立診断
+        </li>
+        <li>
+          <span class="check-ico" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg></span>
+          専門コンシェルジュが直接対応
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. 悩み提起（ここから白基調の本文・候補B下地） ============ -->
+<section class="section bg-soft problems" aria-labelledby="problems-title">
+  <div class="cut cut--ltr cut--dark" aria-hidden="true"></div>
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <p class="kicker">Problem</p>
+      <h2 class="sec-title" id="problems-title">こんな<span class="accent">「モヤモヤ」</span>、抱えていませんか？</h2>
+      <p class="sec-lead">
+        お店を守るために結んだはずの契約が、いつのまにか経営を圧迫している——。<br>
+        店舗オーナーの皆さまから、こうした声を耳にすることが少なくありません。
+      </p>
+    </div>
+    <div class="bubble-grid">
+      <!-- TODO: 実数値に差し替え（表示時は「※一例」を必ず併記） -->
+      <div class="bubble" data-reveal style="--d:.0s">
+        <span class="qmark" aria-hidden="true">!</span>
+        「HP制作、<strong>5年リースで総額200万円</strong>（※一例）って言われて契約したけど…今思えば高すぎない？」
+      </div>
+      <div class="bubble" data-reveal style="--d:.06s">
+        <span class="qmark" aria-hidden="true">!</span>
+        「毎月払っている<strong>『サポート費』や『管理費』、何のお金なのか</strong>実はよく分かっていない」
+      </div>
+      <div class="bubble" data-reveal style="--d:.12s">
+        <span class="qmark" aria-hidden="true">!</span>
+        「営業マンに『集客が増えます』って言われたのに、<strong>問い合わせなんてほとんど来ない</strong>。でも支払いだけは毎月来る」
+      </div>
+      <div class="bubble" data-reveal style="--d:.18s">
+        <span class="qmark" aria-hidden="true">!</span>
+        「契約書を読み返したら、<strong>途中でやめられない条件</strong>になってた。どこから手をつければいいのかも分からない」
+      </div>
+      <div class="bubble" data-reveal style="--d:.24s">
+        <span class="qmark" aria-hidden="true">!</span>
+        「『今だけ』と言われて即決。<strong>あとから相場を知って後悔</strong>している」
+      </div>
+      <div class="bubble" data-reveal style="--d:.3s">
+        <span class="qmark" aria-hidden="true">!</span>
+        「営業電話が多すぎて、<strong>どの会社が本当に信頼できるのか</strong>、もう分からなくなった」
+      </div>
+    </div>
+    <div class="problems-close" data-reveal>
+      <p class="lead-strong">ひとつでも当てはまったら、<br>それは<span class="accent">あなたのせいではありません</span>。</p>
+      <p>忙しい営業の合間に、複雑な契約書を隅々まで読み解くのは不可能です。</p>
+      <p>だから私たちがいます。まずは現状を「数字」で整理するところから、一緒に始めましょう。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. サービス紹介 ============ -->
+<section class="section bg-paper" id="service" aria-labelledby="service-title">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <p class="kicker">Service</p>
+      <h2 class="sec-title" id="service-title">We are レスキューとは</h2>
+      <p class="service-sub">店舗の契約・固定費を、中立の立場で無料診断する「救出専門」コンシェルジュ</p>
+    </div>
+    <div class="service-body" data-reveal>
+      <p>「We are レスキュー」は、HP制作・Web関連・店舗向けサービスの契約に悩む店舗オーナーのための、<strong>完全無料の相談窓口</strong>です。</p>
+      <p>私たちは、どこかのメーカーの営業ではありません。行うことはシンプルです。</p>
+      <ol class="service-steps">
+        <li><strong>現状の整理</strong> — いま結んでいる契約と、毎月・毎年の支払いをすべて書き出し、見える化します。</li>
+        <li><strong>中立の診断</strong> — その費用が、受けているサービスに対して適正かどうかを、特定メーカーに偏らない第三者の目でチェックします。</li>
+        <li><strong>適正な選択肢のご提案</strong> — より条件に合うサービスがあれば複数を比較してご提案。乗り換えを決めた場合は、その手続きもサポートします。</li>
+      </ol>
+      <p>診断の結果、いまの契約のままで問題なければ、それもはっきりお伝えします。「何にいくら払っていて、それは妥当なのか」——この問いに根拠を持って答えられる状態をつくることが、私たちの仕事です。</p>
+    </div>
+    <div class="can-grid">
+      <div class="can-card" data-reveal style="--d:.0s">
+        <span class="can-ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20.5 20.5-5-5"/><path d="M8 10.5h5M10.5 8v5"/></svg>
+        </span>
+        <h3>契約・固定費の無料診断</h3>
+        <p>いまの契約書と請求内容を拝見し、費用と内容のバランスを第三者目線で整理・見える化します。</p>
+      </div>
+      <div class="can-card" data-reveal style="--d:.08s">
+        <span class="can-ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M12 5l6 2m-6-2L6 7"/><path d="M3.5 13.5 6 7l2.5 6.5a3 3 0 0 1-5 0ZM15.5 13.5 18 7l2.5 6.5a3 3 0 0 1-5 0Z"/></svg>
+        </span>
+        <h3>代替サービスの比較・ご提案</h3>
+        <p>特定の会社に偏らず、お店の規模と目的に合った選択肢を複数比較してご提案します。</p>
+      </div>
+      <div class="can-card" data-reveal style="--d:.16s">
+        <span class="can-ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12l-3-3m3 13H4l3 3"/><path d="M4 18V8m16-3v13"/></svg>
+        </span>
+        <h3>乗り換えのサポート</h3>
+        <p>新しいサービスへの切り替えを、手続きの流れのご案内からスムーズに支援します。</p>
+      </div>
+      <div class="can-card" data-reveal style="--d:.24s">
+        <span class="can-ico" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></svg>
+        </span>
+        <h3>状況整理と窓口のご案内</h3>
+        <p>現在の契約でお困りの場合は、状況の整理と手続きの流れのご案内、必要に応じて適切な相談窓口のご紹介まで行います。</p>
+      </div>
+    </div>
+    <p class="service-note" data-reveal>※当サービスは契約内容の診断・情報提供・代替提案を行うものです。解約や違約金に関する交渉の代行は行っておりません。</p>
+  </div>
+</section>
+
+<!-- ============ 5. 選ばれる理由・強み ============ -->
+<section class="section bg-soft" id="reasons" aria-labelledby="reasons-title">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <p class="kicker">Reason</p>
+      <h2 class="sec-title" id="reasons-title">We are レスキューが信頼される<span class="accent">4つの理由</span></h2>
+    </div>
+    <div class="reason-grid">
+      <div class="reason-card" data-reveal style="--d:.0s">
+        <span class="reason-num" aria-hidden="true">01</span>
+        <h3>どこにも偏らない、中立の診断</h3>
+        <p>私たちは特定メーカーや制作会社の代理店ではありません。売りたい商品を持たないからこそ、「売りたいものありき」の提案は一切せず、あなたのお店にとっての最適だけを基準に診断できます。</p>
+      </div>
+      <div class="reason-card" data-reveal style="--d:.08s">
+        <span class="reason-num" aria-hidden="true">02</span>
+        <h3>相談から提案まで、費用は一切かかりません</h3>
+        <p>相談料も、診断料も、提案料も0円。「無料相談のはずが、結局売り込まれた」——そんな体験をさせないことを、私たちは何より大切にしています。ご提案を受けて、断っていただいて構いません。</p>
+      </div>
+      <div class="reason-card" data-reveal style="--d:.16s">
+        <span class="reason-num" aria-hidden="true">03</span>
+        <h3>専門コンシェルジュが、最初から最後まで直接対応</h3>
+        <p>コールセンターのたらい回しはありません。店舗向けサービスの契約・費用事情に詳しい専任のコンシェルジュが、最初にお話を聞いた一人として最後まで並走します。</p>
+      </div>
+      <div class="reason-card" data-reveal style="--d:.24s">
+        <span class="reason-num" aria-hidden="true">04</span>
+        <h3>「そのままで大丈夫」も言える、正直な診断</h3>
+        <p>判断材料は「なんとなくお得」ではなく、現状の費用と代替案を並べた比較でご提示します。診断の結果、いまの契約が適正なら「そのままで大丈夫です」とお伝えします。乗り換えを前提にしない診断をお約束します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. 料金 ============ -->
+<section class="section bg-paper" id="price" aria-labelledby="price-title">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <p class="kicker">Price</p>
+      <h2 class="sec-title" id="price-title">料金は、何度相談しても <span class="accent">0円。</span></h2>
+    </div>
+    <dl class="price-grid">
+      <div class="price-item" data-reveal style="--d:.0s">
+        <dt>ご相談</dt>
+        <dd><span class="yen">0<span class="unit">円</span></span></dd>
+      </div>
+      <div class="price-item" data-reveal style="--d:.06s">
+        <dt>契約・費用診断</dt>
+        <dd><span class="yen">0<span class="unit">円</span></span></dd>
+      </div>
+      <div class="price-item" data-reveal style="--d:.12s">
+        <dt>比較・ご提案</dt>
+        <dd><span class="yen">0<span class="unit">円</span></span></dd>
+      </div>
+      <div class="price-item" data-reveal style="--d:.18s">
+        <dt>乗り換えサポート</dt>
+        <dd><span class="yen">0<span class="unit">円</span></span></dd>
+      </div>
+    </dl>
+    <div class="price-banner" data-reveal>
+      <p>店舗様のご負担は、一切ありません。</p>
+    </div>
+    <div class="why-free" data-reveal>
+      <h3>「なぜ無料なの？」——大切なことなので、先にお答えします。</h3>
+      <p>当サービスは、ご提案先の提携パートナー企業からの紹介料で運営されています。だから店舗様から費用をいただく必要がありません。</p>
+      <p>なお、紹介料の有無や金額によって提案内容を歪めることはせず、<strong>中立の比較・提案をお約束</strong>します。ご提案の際は、比較の根拠もあわせてご説明します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. ご利用の流れ ============ -->
+<section class="section bg-soft" id="flow" aria-labelledby="flow-title">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <p class="kicker">Flow</p>
+      <h2 class="sec-title" id="flow-title">救出まで、たったの<span class="accent">3ステップ</span></h2>
+      <p class="sec-lead">難しい準備は要りません。「なんとなく不安」の段階でも大丈夫です。</p>
+    </div>
+    <ol class="flow-grid">
+      <li class="flow-card" data-reveal style="--d:.0s">
+        <p class="flow-step">STEP <span class="n">1</span><span>ご相談</span></p>
+        <h3>まずは、お話をお聞かせください。</h3>
+        <p>お電話またはLINEで、いまの状況を教えてください。「契約書の見方が分からない」「これって高いの？」——その一言からで大丈夫です。</p>
+      </li>
+      <li class="flow-card" data-reveal style="--d:.1s">
+        <p class="flow-step">STEP <span class="n">2</span><span>無料診断</span></p>
+        <h3>いまの契約と費用を、まるごと整理します。</h3>
+        <p>現在の契約内容・月額費用・サービス内容をコンシェルジュが一緒に整理。何に・いくら・いつまで払うのかを見える化し、費用と内容のバランスが取れているかを第三者目線で診断します。</p>
+      </li>
+      <li class="flow-card" data-reveal style="--d:.2s">
+        <p class="flow-step">STEP <span class="n">3</span><span>ご提案</span></p>
+        <h3>あなたのお店に合った「適正」をご提示します。</h3>
+        <p>診断結果をもとに、適正なサービス・費用の選択肢をご提案。提案を聞いたうえで「現状維持」を選んでいただいても大丈夫です。契約を急かすことはありません。</p>
+      </li>
+    </ol>
+    <div class="flow-cta" data-reveal>
+      <a class="btn btn-red btn--big btn-stack" href="tel:+81671765693">
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:.4em"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.05-.24c1.15.38 2.4.59 3.65.59a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.7 21 3 13.3 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.26.2 2.5.59 3.65a1 1 0 0 1-.25 1.05l-2.24 2.1Z"/></svg>今すぐ電話で相談する（無料）</span>
+        <span class="btn-num">06-7176-5693</span>
+      </a>
+      <!-- TODO: LINE URL確定後、href="https://lin.ee/…" を設定して aria-disabled を外す -->
+      <a class="btn btn-line btn--big" aria-disabled="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.64 2 11.1c0 3.99 3.54 7.33 8.32 7.97.32.07.77.22.88.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1 .88.55 1.08-.46 5.84-3.44 7.97-5.89C21.4 14.4 22 12.83 22 11.1 22 6.64 17.52 3 12 3Z"/></svg>
+        LINEで無料相談
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. FAQ ============ -->
+<section class="section bg-paper" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <p class="kicker">FAQ</p>
+      <h2 class="sec-title" id="faq-title">よくあるご質問</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" data-reveal>
+        <h3>
+          <button class="faq-q" id="faq-q1" type="button">
+            <span class="q-badge" aria-hidden="true">Q1</span>
+            <span class="q-text">本当に無料ですか？あとから費用を請求されませんか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1">
+          <div class="faq-a-inner">
+            <div class="faq-a-body">
+              <p>はい、本当に無料です。ご相談・診断・ご提案・乗り換えサポートのどの段階でも、店舗様に費用をご請求することは一切ありません。後日の請求もありません。「無料と言われて契約したのに…」という経験をお持ちの方にこそ、安心してご利用いただきたいサービスです。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <h3>
+          <button class="faq-q" id="faq-q2" type="button">
+            <span class="q-badge" aria-hidden="true">Q2</span>
+            <span class="q-text">なぜ無料でできるのですか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2">
+          <div class="faq-a-inner">
+            <div class="faq-a-body">
+              <p>ご提案先となる提携パートナー企業からの紹介料で運営しているためです。そのぶん店舗様からは一切いただきません。なお、紹介料の大小を理由に特定の企業へ誘導することはせず、複数の選択肢を中立に比較してご提案することをお約束します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <h3>
+          <button class="faq-q" id="faq-q3" type="button">
+            <span class="q-badge" aria-hidden="true">Q3</span>
+            <span class="q-text">いま他社と契約中ですが、相談してもいいですか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3">
+          <div class="faq-a-inner">
+            <div class="faq-a-body">
+              <p>もちろんです。契約期間の途中でもご相談いただけます。まずまず現在の契約内容と費用を整理し、適正かどうかを診断したうえで、契約期間や条件をふまえた現実的な選択肢をご案内します。「契約中だから動けない」とあきらめる前に、まず状況の整理からご一緒させてください。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <h3>
+          <button class="faq-q" id="faq-q4" type="button">
+            <span class="q-badge" aria-hidden="true">Q4</span>
+            <span class="q-text">いまの契約の解約も手伝ってもらえますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4">
+          <div class="faq-a-inner">
+            <div class="faq-a-body">
+              <p>私たちができるのは、契約状況の整理・診断、解約手続きの一般的な流れのご案内、必要に応じて適切な相談窓口（消費生活センターや弁護士など）のご紹介、そして代替サービスのご提案までです。解約や違約金に関する交渉をお客様に代わって行うことは、法律上お受けできません。そのうえで、ご自身で判断・行動するために必要な情報を丁寧に整え、乗り換え先のご提案や切り替えのサポートまでしっかり伴走します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <h3>
+          <button class="faq-q" id="faq-q5" type="button">
+            <span class="q-badge" aria-hidden="true">Q5</span>
+            <span class="q-text">相談したら、何かを契約しないといけませんか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5">
+          <div class="faq-a-inner">
+            <div class="faq-a-body">
+              <p>いいえ。ご相談・診断だけのご利用も大歓迎です。診断の結果「いまのままで問題ありません」とお伝えすることもありますし、ご提案をお断りいただいても費用は発生せず、その後にしつこくご連絡することもありません。「話を聞いて現状維持を選ぶ」も立派な結論だと考えています。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <h3>
+          <button class="faq-q" id="faq-q6" type="button">
+            <span class="q-badge" aria-hidden="true">Q6</span>
+            <span class="q-text">対応エリアはどこですか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6">
+          <div class="faq-a-inner">
+            <div class="faq-a-body">
+              <p>お電話・LINEでのご相談は全国から承っています。拠点は大阪（大阪市西区）です。対面でのご対応をご希望の場合は、エリアによって調整させていただきますので、まずはお気軽にお問い合わせください。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. クロージングCTA（黒反転で視線をCTAへ集中） ============ -->
+<section class="section closing" id="contact" aria-labelledby="closing-title">
+  <div class="hazard hazard--top" aria-hidden="true"></div>
+  <div class="container">
+    <div data-reveal>
+      <p class="kicker">Contact</p>
+      <h2 class="closing-title" id="closing-title">一人で悩んだ時間は、<br>今日で終わりにしませんか。</h2>
+      <div class="closing-body">
+        <p>「相談するほどのことじゃないかもしれない」——そう思いながら、何か月も払い続けている方がたくさんいます。</p>
+        <p>契約書が手元になくても、金額をはっきり覚えていなくても大丈夫。<br>診断して「適正でした」なら、それはそれで安心材料です。</p>
+        <p class="punch"><span class="accent">5分の相談</span>が、これから何年も続く固定費を変えるかもしれません。私たちが救出に向かいます。</p>
+      </div>
+      <div class="closing-cta">
+        <a class="btn btn-red btn--big btn-stack" href="tel:+81671765693">
+          <span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:.4em"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.05-.24c1.15.38 2.4.59 3.65.59a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.7 21 3 13.3 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.26.2 2.5.59 3.65a1 1 0 0 1-.25 1.05l-2.24 2.1Z"/></svg>電話で無料相談する</span>
+          <span class="btn-num">06-7176-5693</span>
+        </a>
+        <!-- TODO: LINE URL確定後、href="https://lin.ee/…" を設定して aria-disabled を外す -->
+        <a class="btn btn-line btn--big" aria-disabled="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.64 2 11.1c0 3.99 3.54 7.33 8.32 7.97.32.07.77.22.88.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1 .88.55 1.08-.46 5.84-3.44 7.97-5.89C21.4 14.4 22 12.83 22 11.1 22 6.64 17.52 3 12 3Z"/></svg>
+          LINEで無料相談する
+        </a>
+      </div>
+      <p class="closing-hours">受付時間 10:00〜19:00</p><!-- TODO: 受付時間を確認して確定（現在プレースホルダー） -->
+      <p class="closing-assure">ご相談は無料です。しつこい営業や、無理なお乗り換えのご案内はいたしません。</p>
+    </div>
+  </div>
+  <div class="hazard hazard--bottom" aria-hidden="true"></div>
+</section>
+
+</main>
+
+<!-- ============ 10. フッター ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <!-- 暗い背景のため白抜きロゴ（logo-white.png）を使用（明るい背景では logo-trans.png） -->
+        <img src="assets/logo-white.png" alt="We are レスキュー" width="982" height="384">
+        <p>高すぎる契約から、お店を救う。<br>店舗の契約・固定費を中立の立場で無料診断するコンシェルジュサービス。</p>
+      </div>
+      <div class="footer-info">
+        <h2>Company</h2>
+        <dl>
+          <dt>運営会社</dt>
+          <dd>株式会社OPENGATE</dd>
+          <dt>所在地</dt>
+          <dd>〒550-0015 大阪府大阪市西区南堀江1丁目21-4 Jsビル 9F</dd>
+          <dt>TEL</dt>
+          <dd><a href="tel:+81671765693">06-7176-5693</a></dd>
+        </dl>
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <ul>
+        <li><a href="#service">サービス紹介</a></li>
+        <li><a href="#price">料金</a></li>
+        <li><a href="#flow">ご利用の流れ</a></li>
+        <li><a href="#faq">よくあるご質問</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+    <p class="copyright">&copy; 2026 OPENGATE Inc.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  document.documentElement.classList.add('js');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---- ヘッダーのスクロール状態（rAFスロットル・候補C） ---- */
+  var header = document.getElementById('siteHeader');
+  var ticking = false;
+  function updateHeader() {
+    header.classList.toggle('is-scrolled', window.scrollY > 10);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(updateHeader);
+    }
+  }, { passive: true });
+  updateHeader();
+
+  /* ---- スムーススクロール + フォーカス管理 + URL同期（候補B） ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var href = a.getAttribute('href');
+      if (href === '#') { e.preventDefault(); return; } /* LINEプレースホルダー等 */
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: prefersReduced.matches ? 'auto' : 'smooth', block: 'start' });
+      /* アクセシビリティ: スクロール先へフォーカスを移す */
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+      if (history.pushState) history.pushState(null, '', href);
+    });
+  });
+
+  /* ---- FAQアコーディオン（候補B: grid-rows + visibility の正統実装）
+          aria-expanded / aria-controls はJSでのみ付与する:
+          JS無効時は回答が常時表示のため、折りたたみセマンティクスを露出させない ---- */
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    var item = btn.closest('.faq-item');
+    var panel = item ? item.querySelector('.faq-a') : null;
+    if (panel) btn.setAttribute('aria-controls', panel.id);
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (panel) panel.classList.toggle('is-open', !expanded);
+    });
+  });
+
+  /* ---- スクロールリビール（候補Bの安全パターン:
+          JS有効かつIO対応かつreduced-motion無効の場合のみ非表示化） ---- */
+  if (!prefersReduced.matches && 'IntersectionObserver' in window) {
+    var targets = document.querySelectorAll('[data-reveal]');
+    targets.forEach(function (el) { el.classList.add('will-reveal'); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
