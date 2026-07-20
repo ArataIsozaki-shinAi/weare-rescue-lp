@@ -30,6 +30,8 @@
    調整: 受付時間表記の重複（ヘッダー/ヒーローCTA下）を解消
    ブランド適用: 参考サイトの青 → ブランド赤 #E60012 系
    装飾: ロゴ（WA+）由来の三角形・プラスの淡色幾何学パターン
+   ヒーロー改修: 優勝案A（ロゴエンブレム+浮遊チップ+2カラム構成）を統合 /
+         案Bのプライスタグ型0円バッジ / 案Cのゴースト「RESCUE」タイポ・注記コントラスト補正を部分移植
    ============================================================ */
 :root{
   --red:#E60012;          /* 面・大見出し・CTA用 */
@@ -148,7 +150,8 @@ p,li,dd{word-break:auto-phrase}
 .btn-stack .btn-num{font-size:1.28em;font-weight:900;letter-spacing:.04em;font-feature-settings:"tnum"}
 .cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch}
 .cta-row .btn{flex:1 1 260px;max-width:420px}
-.cta-note{margin-top:1.1em;font-size:.85rem;color:var(--muted);letter-spacing:.04em}
+/* 移植(ヒーロー案C): ウォッシュ背景上の注記コントラスト補正（--muted比で濃く） */
+.cta-note{margin-top:1.1em;font-size:.85rem;color:#5d5e66;letter-spacing:.04em}
 
 /* スクロールリビール（JS有効+IO対応+reduced-motion無効時のみ .will-reveal 付与） */
 .will-reveal{
@@ -189,18 +192,19 @@ p,li,dd{word-break:auto-phrase}
 }
 .btn-header .btn-num{font-size:1.06em;font-weight:900;letter-spacing:.03em}
 
-/* ============ 2. ヒーロー（ライト+幾何学パターン） ============ */
+/* ============ 2. ヒーロー（ライト+ロゴエンブレム構成 / ヒーロー改修 優勝案A統合） ============ */
 .hero{
   position:relative;overflow:clip;
   background:
-    radial-gradient(760px 420px at 100% 0%,rgba(230,0,18,.045),transparent 62%),
-    linear-gradient(180deg,#fff 0%,#fff 68%,var(--paper-soft) 100%);
-  padding-top:clamp(56px,8vw,110px);
+    radial-gradient(940px 560px at 86% 4%,rgba(230,0,18,.06),transparent 62%),
+    linear-gradient(180deg,#fff 0%,#fff 66%,var(--paper-soft) 100%);
+  padding-top:clamp(40px,5.5vw,62px);
   padding-bottom:clamp(72px,9vw,120px);
 }
-.hero .container{position:relative}
-.hero-copy{position:relative;z-index:2;max-width:46em}
+.hero .container{position:relative;z-index:2}
+.hero-copy{position:relative}
 .hero-kicker{
+  position:relative;z-index:3;
   display:inline-flex;align-items:center;gap:.7em;
   font-size:clamp(.82rem,1.8vw,.95rem);font-weight:700;letter-spacing:.14em;
   color:var(--ink);
@@ -213,7 +217,7 @@ p,li,dd{word-break:auto-phrase}
   background:var(--red);
   clip-path:polygon(50% 0,100% 100%,0 100%);
 }
-.hero-title{letter-spacing:.02em}
+.hero-title{position:relative;z-index:3;letter-spacing:.02em}
 .hero-mid{
   display:block;
   font-size:clamp(1.18rem,3vw,1.85rem);
@@ -227,17 +231,151 @@ p,li,dd{word-break:auto-phrase}
   font-weight:900;color:var(--red);line-height:1.28;
   letter-spacing:.015em;
 }
-.hero-sub{margin-top:1.8em;max-width:37em;font-size:clamp(.95rem,1.8vw,1.05rem)}
-.hero-sub + .hero-sub{margin-top:1em}
-.hero-cta{margin-top:2.4em}
-/* 幾何学パターン（三角形・プラス / ロゴのWA+モチーフ） */
+/* 見出しの下: 左=リード文+CTA / 右=ロゴ・エンブレム の2カラム
+   （モバイルは コピー→CTA→ビジュアル の積み順でCTAをFV内に保持） */
+.hero-cols{position:relative;display:grid;gap:clamp(30px,4vw,44px);align-items:start}
+.hero-lead{position:relative;z-index:3}
+.hero-sub{margin-top:1.4em;max-width:37em;font-size:clamp(.95rem,1.8vw,1.05rem)}
+.hero-sub + .hero-sub{margin-top:.9em}
+.hero-cta{margin-top:1.6em}
+
+/* ロゴ・エンブレム構成（主役ビジュアル / 装飾のみ・コピーを食わない淡色レイヤー） */
+.hero-visual{position:relative;z-index:1;pointer-events:none}
+.hv-scene{position:relative;width:min(100%,460px);margin-inline:auto;aspect-ratio:1}
+.hv-rays{position:absolute;inset:0;width:100%;height:100%}
+.hv-blob{position:absolute;display:block}
+.hv-blob--back{
+  inset:2% -3% 8% 12%;
+  background:linear-gradient(160deg,#FDF3F4 0%,#FBE0E4 100%);
+  border-radius:62% 38% 54% 46%/44% 60% 40% 56%;
+  transform:rotate(10deg);
+}
+.hv-blob--main{
+  inset:9% 7% 5% 3%;
+  background:linear-gradient(145deg,#FDECEE 10%,#F8D0D6 100%);
+  border-radius:54% 46% 57% 43%/49% 55% 45% 51%;
+}
+.hv-ring{
+  position:absolute;right:0;top:5%;width:36%;aspect-ratio:1;
+  border:2px dashed #F0ABB4;border-radius:50%;
+}
+.hv-card{
+  position:absolute;left:50%;top:50%;
+  width:min(78%,344px);
+  transform:translate(-50%,-52%) rotate(-3deg);
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:0 24px 48px rgba(23,24,28,.13);
+  padding:clamp(22px,4vw,32px) clamp(24px,4.4vw,36px);
+}
+/* 名札風の赤ステッチ（価格帯ミシン目のエコー） */
+.hv-card::after{
+  content:"";position:absolute;inset:8px;
+  border:1px dashed rgba(230,0,18,.22);border-radius:calc(var(--r-lg) - 7px);
+}
+.hv-card img{width:100%}
+.hv-chip{
+  position:absolute;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--line);
+  box-shadow:var(--shadow);color:var(--red);
+}
+.hv-chip--tel{right:5%;top:14%;width:64px;height:64px;border-radius:50%;animation:hv-float 5.6s ease-in-out -1.4s infinite alternate}
+/* 移植(ヒーロー案B): プライスタグ型0円バッジ（穴付き・傾きタグ）— 料金バンド・メリット02の0円訴求と呼応 */
+.hv-chip--zero{
+  left:-3%;top:56%;padding:0;border:0;background:transparent;box-shadow:none;
+  rotate:-7deg;animation:hv-float 6.4s ease-in-out infinite alternate;
+}
+.hv-chip--zero svg{display:block;filter:drop-shadow(0 12px 24px rgba(23,24,28,.16))}
+.hv-chip--check{right:13%;bottom:8%;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,#F5303C,var(--red-dark));box-shadow:var(--shadow-red);animation:hv-float 5s ease-in-out -2.8s infinite alternate}
+@keyframes hv-float{from{translate:0 -7px}to{translate:0 7px}}
+
+/* 移植(ヒーロー案C): アウトライン「RESCUE」ゴーストタイポ —
+   低不透明度の奥行き演出。左下端へ意図的にブリードさせ切れを"演出"として成立させる */
+.hero-ghost{
+  position:absolute;z-index:1;left:-.05em;bottom:-.1em;
+  pointer-events:none;user-select:none;
+  font-weight:900;line-height:1;white-space:nowrap;
+  font-size:clamp(96px,16vw,230px);letter-spacing:.04em;
+  color:transparent;-webkit-text-stroke:2px rgba(230,0,18,.08);
+}
+
+/* 幾何学パターン（三角形・プラス / WA+モチーフ — 大胆に・淡色キープ） */
 .hero-deco{
   position:absolute;z-index:1;pointer-events:none;
-  top:clamp(-30px,-2vw,0px);right:clamp(-140px,-8vw,-40px);
-  width:clamp(300px,42vw,560px);
+  top:clamp(-48px,-2vw,-8px);right:clamp(-170px,-10vw,-60px);
+  width:clamp(360px,48vw,680px);
 }
-@media (max-width:960px){
-  .hero-deco{opacity:.32;right:-150px;width:330px}
+.hero-deco--bl{
+  top:auto;right:auto;bottom:110px;left:-44px;
+  width:clamp(150px,16vw,230px);
+}
+@media (min-width:1000px){
+  .hero-cols{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(24px,3.4vw,48px)}
+  .hero-visual{margin-top:clamp(-230px,-16vw,-150px)}
+}
+@media (max-width:999.98px){
+  .hero-deco{top:-20px;right:-170px;width:380px;opacity:.5}
+  .hero-deco--bl{display:none}
+  .hero-visual{margin-top:14px}
+  .hv-scene{width:min(100%,400px)}
+}
+
+/* モバイル改修(優勝案B): コンパクトエンブレム —
+   FV外へ沈む大型エンブレムの代わりに、特大見出しとサブの間へ
+   横長白カード（ロゴ+0円ミニタグ+チェックバッジ）を挿入して視覚の主役を作る。
+   デスクトップ(960px+)非影響のため 760px 未満のみで表示 */
+.hero-emblem-m{display:none}
+@media (max-width:759.98px){
+  .hero{padding-top:24px}
+  .hero-kicker{margin-bottom:1.05em}
+  /* 大型エンブレム（FV外）はコンパクト版に置換して非表示 */
+  .hero-visual{display:none}
+  .hero-emblem-m{
+    position:relative;z-index:2;display:block;
+    margin-top:12px;max-width:392px;
+  }
+  /* 破線リングのエコー（カード左上に部分掛かり） */
+  .hem-ring{
+    position:absolute;left:-24px;top:-16px;width:58px;height:58px;
+    border:2px dashed #F0ABB4;border-radius:50%;
+  }
+  .hem-card{
+    position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    min-height:58px;padding:11px 14px;
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 26px rgba(23,24,28,.13);
+  }
+  /* 名札風の赤ステッチ（hv-cardのエコー） */
+  .hem-card::after{
+    content:"";position:absolute;inset:5px;pointer-events:none;
+    border:1px dashed rgba(230,0,18,.22);border-radius:10px;
+  }
+  .hem-logo{width:auto;height:34px;flex:none}
+  .hem-sep{flex:none;width:1px;height:30px;background:var(--line)}
+  .hem-zero{flex:none;display:block;rotate:-6deg;filter:drop-shadow(0 6px 12px rgba(23,24,28,.16))}
+  .hem-check{
+    flex:none;display:grid;place-items:center;
+    width:32px;height:32px;border-radius:50%;
+    background:linear-gradient(135deg,#F5303C,var(--red-dark));
+    box-shadow:var(--shadow-red);
+    animation:hv-float 5s ease-in-out -2.4s infinite alternate;
+  }
+  /* 移植(案A): CTAブロック余白の圧縮 — 390でLINEボタンまでFVに収める垂直リズム */
+  .hero-sub{margin-top:1.15em}
+  .hero-sub + .hero-sub{margin-top:.7em}
+  .hero-cta{margin-top:.85em;gap:12px}
+  .hero .cta-note{margin-top:.85em}
+  /* 背景パターンは移植(案A)の控えめ濃度 — 430pxで見出しに重なる大型三角(4番目のpath)を淡く・右へ */
+  .hero-deco{top:-26px;right:-140px;width:400px;opacity:.5}
+  .hero-deco path:nth-of-type(4){opacity:.6}
+  /* 赤プラス（6番目のpath）は特大赤見出しと重なり得るため淡色化（AA維持） */
+  .hero-deco path:nth-of-type(6){opacity:.28}
+  .hero-deco--bl{display:block;bottom:24px;left:-34px;width:150px;opacity:.85}
+}
+/* 移植(案A): 320px級の狭幅ではロゴストリップを 0円タグ+チェックのみへ縮小し、電話CTAをFV内へ */
+@media (max-width:359.98px){
+  .hero-emblem-m{margin-top:10px;max-width:230px}
+  .hem-logo,.hem-sep{display:none}
+  .hem-card{justify-content:center;gap:18px;min-height:52px;padding:9px 14px}
 }
 /* ヒーロー下の安心バー（白カード3分割） */
 .assure{
@@ -354,7 +492,7 @@ p,li,dd{word-break:auto-phrase}
 .price-band{
   position:relative;overflow:clip;
   background:linear-gradient(150deg,var(--red) 0%,var(--red-deep) 100%);
-  color:#FFE3E6;
+  color:#fff;
 }
 /* 移植(候補RB): 赤バンド上端のミシン目（ステッチ）ディテール */
 .price-band::before{
@@ -589,27 +727,34 @@ p,li,dd{word-break:auto-phrase}
 
 <!-- ============ 2. ヒーロー ============ -->
 <section class="hero" id="top" aria-labelledby="hero-title">
-  <!-- 幾何学パターン（三角形・プラス / WA+モチーフ） -->
-  <svg class="hero-deco" viewBox="0 0 560 640" fill="none" aria-hidden="true">
+  <!-- 幾何学パターン（三角形・プラス / WA+モチーフ — 大胆に・淡色キープ） -->
+  <svg class="hero-deco" viewBox="0 0 640 720" fill="none" aria-hidden="true">
     <defs>
       <linearGradient id="hg1" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#FDE7EA"/><stop offset="1" stop-color="#F8CED4"/>
+        <stop offset="0" stop-color="#FDE7EA"/><stop offset="1" stop-color="#F6C7CD"/>
       </linearGradient>
       <linearGradient id="hg2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#FDF1F3"/><stop offset="1" stop-color="#FADDE1"/>
+        <stop offset="0" stop-color="#FDF1F3"/><stop offset="1" stop-color="#F8D3D8"/>
       </linearGradient>
     </defs>
-    <path d="M352 26 L496 26 L424 150 Z" fill="url(#hg1)"/>
-    <path d="M243 118 h24 v36 h36 v24 h-36 v36 h-24 v-36 h-36 v-24 h36 Z" fill="#FBDCE0"/>
-    <path d="M196 52 l26 45 h-52 Z" fill="#E60012" opacity=".82"/>
-    <path d="M404 208 L520 408 L288 408 Z" fill="url(#hg2)"/>
-    <path d="M132 236 L200 354 L64 354 Z" stroke="#F5BFC6" stroke-width="3" fill="none"/>
-    <path d="M139 424 h12 v18 h18 v12 h-18 v18 h-12 v-18 h-18 v-12 h18 Z" fill="#E60012" opacity=".62"/>
-    <path d="M312 452 L432 452 L372 560 Z" fill="url(#hg1)"/>
-    <path d="M236 560 l18 32 h-36 Z" fill="#F6C4CA"/>
-    <path d="M448 486 h10 v16 h16 v10 h-16 v16 h-10 v-16 h-16 v-10 h16 Z" stroke="#F3B7BE" stroke-width="2.4" fill="none"/>
-    <path d="M496 168 l16 28 h-32 Z" fill="#F8CDD3"/>
+    <path d="M356 14 L558 14 L457 186 Z" fill="url(#hg1)"/>
+    <path d="M246 96 h30 v44 h44 v30 h-44 v44 h-30 v-44 h-44 v-30 h44 Z" fill="#FADDE1"/>
+    <path d="M176 28 l34 58 h-68 Z" fill="#E60012" opacity=".72"/>
+    <path d="M468 232 L618 472 L328 472 Z" fill="url(#hg2)"/>
+    <path d="M118 252 L206 400 L40 400 Z" stroke="#F2B3BB" stroke-width="4" fill="none"/>
+    <path d="M148 470 h16 v24 h24 v16 h-24 v24 h-16 v-24 h-24 v-16 h24 Z" fill="#E60012" opacity=".5"/>
+    <path d="M330 522 L478 522 L404 650 Z" fill="url(#hg1)"/>
+    <path d="M544 540 h12 v20 h20 v12 h-20 v20 h-12 v-20 h-20 v-12 h20 Z" stroke="#F0A9B2" stroke-width="3" fill="none"/>
+    <path d="M248 640 l22 38 h-44 Z" fill="#F5BFC6"/>
+    <path d="M560 118 l20 34 h-40 Z" fill="#F6C7CD"/>
   </svg>
+  <svg class="hero-deco hero-deco--bl" viewBox="0 0 240 210" fill="none" aria-hidden="true">
+    <path d="M42 34 L134 34 L88 114 Z" stroke="#F4BAC2" stroke-width="3.5" fill="none"/>
+    <path d="M158 106 h13 v20 h20 v13 h-20 v20 h-13 v-20 h-20 v-13 h20 Z" fill="#F8CDD3"/>
+    <path d="M62 146 l17 30 h-34 Z" fill="#E60012" opacity=".38"/>
+  </svg>
+  <!-- 移植(ヒーロー案C): アウトラインRESCUEゴーストタイポ（装飾のみ・低不透明度） -->
+  <span class="hero-ghost" aria-hidden="true">RESCUE</span>
 
   <div class="container">
     <div class="hero-copy">
@@ -618,8 +763,27 @@ p,li,dd{word-break:auto-phrase}
         <span class="hero-mid"><span class="pu">その月額、</span><span class="pu">払いすぎかもしれません。</span></span>
         <span class="hero-big"><span class="pu">店舗オーナーの方、</span><span class="pu">必ず読んでください。</span></span>
       </h1>
+      <div class="hero-cols">
+        <div class="hero-lead">
+      <!-- モバイル改修(優勝案B): コンパクトエンブレム（装飾のため aria-hidden / 760px未満のみCSSで表示） -->
+      <div class="hero-emblem-m" aria-hidden="true">
+        <span class="hem-ring"></span>
+        <div class="hem-card">
+          <!-- 明るい背景のため透過ロゴ（logo-trans.png）を使用（装飾のため alt 空） -->
+          <img class="hem-logo" src="assets/logo-trans.png" alt="" width="982" height="384">
+          <span class="hem-sep"></span>
+          <svg class="hem-zero" width="66" height="36" viewBox="0 0 120 66" aria-hidden="true">
+            <path d="M36 5h70a9 9 0 0 1 9 9v38a9 9 0 0 1-9 9H36L7 33z" fill="#fff" stroke="#e7e7ec" stroke-width="2"/>
+            <circle cx="27" cy="33" r="5.5" fill="#FDECEE" stroke="#E60012" stroke-width="3"/>
+            <text x="75" y="45" font-size="32" font-weight="900" fill="#E60012" text-anchor="middle" font-family="'Noto Sans JP',sans-serif">0円</text>
+          </svg>
+          <span class="hem-check">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
+          </span>
+        </div>
+      </div>
       <p class="hero-sub">
-        HP制作の高額契約、よく分からないまま<span class="pu">払い続けている</span>月額費用、鳴りやまない営業電話——。<br>
+        HP制作の高額契約、よく分からないまま<span class="pu">払い続けている</span>月額費用、鳴りやまない<span class="pu">営業電話——。</span><br>
         「We are レスキュー」は、店舗オーナーの契約と固定費を<strong>中立の第三者として無料で診断</strong>し、適正なサービスと費用をご提案するコンシェルジュサービスです。
       </p>
       <p class="hero-sub">相談から提案まで、店舗側の費用負担は<strong>一切ありません</strong>。</p>
@@ -635,6 +799,41 @@ p,li,dd{word-break:auto-phrase}
         </a>
       </div>
       <p class="cta-note">相談無料｜受付時間 10:00〜19:00</p><!-- TODO: 受付時間を確認して確定 -->
+        </div>
+
+        <!-- ロゴ・エンブレム（主役ビジュアル / 装飾のため aria-hidden） -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hv-scene">
+            <svg class="hv-rays" viewBox="0 0 460 460" fill="none" aria-hidden="true">
+              <path d="M64 38 L130 38 L97 96 Z" fill="#FADDE1"/>
+              <path d="M382 58 h14 v22 h22 v14 h-22 v22 h-14 v-22 h-22 v-14 h22 Z" fill="#F8CDD3"/>
+              <path d="M20 300 l18 32 h-36 Z" fill="#E60012" opacity=".4"/>
+              <path d="M332 424 l16 28 h-32 Z" fill="#F6C4CA"/>
+            </svg>
+            <span class="hv-blob hv-blob--back"></span>
+            <span class="hv-blob hv-blob--main"></span>
+            <span class="hv-ring"></span>
+            <div class="hv-card">
+              <!-- 明るい背景のため透過ロゴ（logo-trans.png）を使用（装飾のため alt 空） -->
+              <img src="assets/logo-trans.png" alt="" width="982" height="384">
+            </div>
+            <span class="hv-chip hv-chip--tel">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.05-.24c1.15.38 2.4.59 3.65.59a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.7 21 3 13.3 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.26.2 2.5.59 3.65a1 1 0 0 1-.25 1.05l-2.24 2.1Z"/></svg>
+            </span>
+            <!-- 移植(ヒーロー案B): プライスタグ型0円バッジ（穴付き・傾きタグ） -->
+            <span class="hv-chip hv-chip--zero">
+              <svg width="104" height="57" viewBox="0 0 120 66" aria-hidden="true">
+                <path d="M36 5h70a9 9 0 0 1 9 9v38a9 9 0 0 1-9 9H36L7 33z" fill="#fff" stroke="#e7e7ec" stroke-width="2"/>
+                <circle cx="27" cy="33" r="5.5" fill="#FDECEE" stroke="#E60012" stroke-width="3"/>
+                <text x="75" y="45" font-size="32" font-weight="900" fill="#E60012" text-anchor="middle" font-family="'Noto Sans JP',sans-serif">0円</text>
+              </svg>
+            </span>
+            <span class="hv-chip hv-chip--check">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 安心バー -->
